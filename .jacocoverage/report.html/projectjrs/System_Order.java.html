@@ -1,0 +1,929 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>System_Order.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;ProjectJRS&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">projectjrs</a> &gt; <span class="el_source">System_Order.java</span></div><h1>System_Order.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package projectjrs;
+
+import com.sun.javafx.tk.Toolkit;
+import java.awt.Image;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.StringTokenizer;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author surap
+ */
+public class System_Order extends javax.swing.JFrame {
+
+    String nm_makan, nm_makan1, nm_minum, pesan;
+    int Harga, Harga1, Harga2, jumlah_Beli, jumlah_Beli1, jumlah_Beli2, Jumlah, total_Harga, total_pajak, jumlahby, kembalian,totalpaket,totalalacarte,totalminuman;
+
+    String txt;
+<span class="fc" id="L26">    String Gantiformat = &quot;&quot;;</span>
+    StringTokenizer token;
+  public String calculate(){
+<span class="nc" id="L29">       txt_nama_cashier.setText(Login_Form.jTextField1.getText());</span>
+
+<span class="nc bnc" id="L31" title="All 6 branches missed.">        if (jumlah_Beli &gt;= 0 &amp;&amp; jumlah_Beli1 &gt;= 0 &amp;&amp; jumlah_Beli2 &gt;= 0) {</span>
+<span class="nc" id="L32">            Receipt f3 = new Receipt();</span>
+
+<span class="nc" id="L34">            jumlah_Beli = Integer.parseInt(sp_jumlah_paket.getValue().toString());</span>
+<span class="nc" id="L35">            jumlah_Beli1 = Integer.parseInt(sp_jumlah_alacarte.getValue().toString());</span>
+<span class="nc" id="L36">            jumlah_Beli2 = Integer.parseInt(sp_jumlah_drinks.getValue().toString());</span>
+<span class="nc" id="L37">             totalpaket=(multiply(jumlah_Beli, Harga));</span>
+<span class="nc" id="L38">            totalalacarte=(multiply(jumlah_Beli1, Harga1));</span>
+<span class="nc" id="L39">            totalminuman=(multiply(jumlah_Beli2, Harga2));</span>
+<span class="nc" id="L40">            total_pajak = pajak(totalpaket, totalalacarte, totalminuman, 10, 100);</span>
+            
+           
+            
+<span class="nc" id="L44">            total_Harga =total(totalpaket, totalalacarte, totalminuman, total_pajak);</span>
+
+<span class="nc" id="L46">            Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(total_Harga);</span>
+<span class="nc" id="L47">            token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="nc" id="L48">            Gantiformat = token.nextToken();</span>
+<span class="nc" id="L49">            Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="nc" id="L50">            txt_total_harga_frame2.setText(Gantiformat);</span>
+        }
+<span class="nc bnc" id="L52" title="All 6 branches missed.">        if (jumlah_Beli &lt; 1 &amp;&amp; jumlah_Beli1 &lt; 1 &amp;&amp; jumlah_Beli2 &lt; 1) {</span>
+<span class="nc" id="L53">            JOptionPane.showMessageDialog(null, &quot;Masukkan Jumlah Beli&quot;);</span>
+        }
+<span class="nc" id="L55">        Receipt f3 = new Receipt();</span>
+<span class="nc" id="L56">return null;</span>
+  }
+  public String combo(){
+<span class="fc" id="L59">      nm_makan = (String) cb_paket_frame2.getSelectedItem();</span>
+
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (nm_makan == &quot;Pilih Pesanan&quot;) {</span>
+<span class="fc" id="L62">            Harga = 0;</span>
+<span class="fc" id="L63">            Jumlah = 0;</span>
+
+<span class="nc bnc" id="L65" title="All 2 branches missed.">        } else if (nm_makan == &quot;Combo A&quot;) {</span>
+<span class="nc" id="L66">            Harga = 27000;</span>
+
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        } else if (nm_makan == &quot;Combo B&quot;) {</span>
+<span class="nc" id="L69">            Harga = 27000;</span>
+
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        } else if (nm_makan == &quot;Combo C&quot;) {</span>
+<span class="nc" id="L72">            Harga = 25000;</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        } else if (nm_makan == &quot;Combo D&quot;) {</span>
+<span class="nc" id="L75">            Harga = 23000;</span>
+
+        }
+
+<span class="fc" id="L79">        Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(Harga);</span>
+<span class="fc" id="L80">        token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L81">        Gantiformat = token.nextToken();</span>
+<span class="fc" id="L82">        Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L83">        txt_harga_paket_frame2.setText(Gantiformat);</span>
+
+<span class="fc" id="L85">        Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(Jumlah);</span>
+<span class="fc" id="L86">        token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L87">        Gantiformat = token.nextToken();</span>
+<span class="fc" id="L88">        Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L89">        return null;</span>
+  }
+  
+  public String bayar(){
+<span class="pc bpc" id="L93" title="5 of 8 branches missed.">         if (Harga == 0 &amp;&amp; Harga1 == 0 &amp;&amp; Harga2 == 0 || total_pajak == 0) {</span>
+<span class="fc" id="L94">            JOptionPane.showMessageDialog(null, &quot;Masukan Pesanan&quot;);</span>
+        }
+<span class="fc" id="L96">        jumlahby = Integer.parseInt(txt_jumlah_bayar_frame2.getText());</span>
+
+<span class="fc" id="L98">        kembalian = subtract(jumlahby, total_Harga);</span>
+
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">        if (jumlahby &lt; total_Harga) {</span>
+<span class="nc" id="L101">            JOptionPane.showMessageDialog(null, &quot;Uang Yang Dimasukan Tidak Cukup&quot;);</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        } else if (jumlahby &gt;= total_Harga) {</span>
+            
+<span class="fc" id="L104">            Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(jumlahby);</span>
+<span class="fc" id="L105">            token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L106">            Gantiformat = token.nextToken();</span>
+<span class="fc" id="L107">            Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L108">            txt_jumlah_bayar_frame2.setText(Gantiformat);</span>
+
+<span class="fc" id="L110">            Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(kembalian);</span>
+<span class="fc" id="L111">            token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L112">            Gantiformat = token.nextToken();</span>
+<span class="fc" id="L113">            Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L114">            txt_jumlah_kembalian_frame2.setText(Gantiformat);</span>
+<span class="fc" id="L115">            return null;</span>
+        }
+<span class="nc" id="L117">        return null;</span>
+  }
+  public String alacarte(){
+<span class="fc" id="L120">        nm_makan1 = (String) cb_alacarte_frame2.getSelectedItem();</span>
+
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Pilih Pesanan&quot;) {</span>
+<span class="fc" id="L123">            Harga1 = 0;</span>
+<span class="fc" id="L124">            Jumlah = 0;</span>
+        }
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Dada Ayam&quot;) {</span>
+<span class="nc" id="L127">            Harga1 = 12000;</span>
+        }
+<span class="pc bpc" id="L129" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Paha Atas Ayam&quot;) {</span>
+<span class="nc" id="L130">            Harga1 = 13000;</span>
+        }
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Paha Bawah Ayam&quot;) {</span>
+<span class="nc" id="L133">            Harga1 = 12000;</span>
+        }
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Sayap Ayam&quot;) {</span>
+<span class="nc" id="L136">            Harga1 = 11000;</span>
+        }
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Cheese Burger&quot;) {</span>
+<span class="nc" id="L139">            Harga1 = 13000;</span>
+        }
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Beef Burger&quot;) {</span>
+<span class="nc" id="L142">            Harga1 = 13000;</span>
+        }
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Chicken Burger&quot;) {</span>
+<span class="nc" id="L145">            Harga1 = 11000;</span>
+        }
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;French Fries&quot;) {</span>
+<span class="nc" id="L148">            Harga1 = 10000;</span>
+        }
+<span class="pc bpc" id="L150" title="1 of 2 branches missed.">        if (nm_makan1 == &quot;Nasi&quot;) {</span>
+<span class="nc" id="L151">            Harga1 = 5000;</span>
+        }
+
+<span class="fc" id="L154">        Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(Harga1);</span>
+<span class="fc" id="L155">        token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L156">        Gantiformat = token.nextToken();</span>
+<span class="fc" id="L157">        Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L158">        txt_harga_alacarte_frame2.setText(Gantiformat);</span>
+
+<span class="fc" id="L160">        Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(Jumlah);</span>
+<span class="fc" id="L161">        token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L162">        Gantiformat = token.nextToken();</span>
+<span class="fc" id="L163">        Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L164">        return null;</span>
+  }
+    public String drink(){
+<span class="fc" id="L167">        nm_minum = (String) cb_drinks_frame2.getSelectedItem();</span>
+
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">        if (nm_minum == &quot;Pilih Pesanan&quot;) {</span>
+<span class="fc" id="L170">            Harga2 = 0;</span>
+<span class="fc" id="L171">            Jumlah = 0;</span>
+        }
+<span class="pc bpc" id="L173" title="1 of 2 branches missed.">        if (nm_minum == &quot;Air Mineral&quot;) {</span>
+<span class="nc" id="L174">            Harga2 = 6000;</span>
+        }
+<span class="pc bpc" id="L176" title="1 of 2 branches missed.">        if (nm_minum == &quot;Soda&quot;) {</span>
+<span class="nc" id="L177">            Harga2 = 8000;</span>
+        }
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (nm_minum == &quot;Ice Tea&quot;) {</span>
+<span class="nc" id="L180">            Harga2 = 5000;</span>
+        }
+<span class="pc bpc" id="L182" title="1 of 2 branches missed.">        if (nm_minum == &quot;Lemon Tea&quot;) {</span>
+<span class="nc" id="L183">            Harga2 = 6000;</span>
+        }
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        if (nm_minum == &quot;Black Coffee&quot;) {</span>
+<span class="nc" id="L186">            Harga2 = 7000;</span>
+        }
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">        if (nm_minum == &quot;Capuccino&quot;) {</span>
+<span class="nc" id="L189">            Harga2 = 10000;</span>
+        }
+
+<span class="fc" id="L192">        Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(Harga2);</span>
+<span class="fc" id="L193">        token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L194">        Gantiformat = token.nextToken();</span>
+<span class="fc" id="L195">        Gantiformat = Gantiformat.replace('.', '.');</span>
+<span class="fc" id="L196">        txt_harga_drinks_frame2.setText(Gantiformat);</span>
+
+<span class="fc" id="L198">        Gantiformat = NumberFormat.getNumberInstance(Locale.ENGLISH).format(Jumlah);</span>
+<span class="fc" id="L199">        token = new StringTokenizer(Gantiformat, &quot;.&quot;);</span>
+<span class="fc" id="L200">        Gantiformat = token.nextToken();</span>
+<span class="fc" id="L201">        Gantiformat = Gantiformat.replace('.', '.');</span>
+//        txt_jumlah_drinks_frame2.setText(Gantiformat);
+
+<span class="fc" id="L204">return null;</span>
+    }
+<span class="fc" id="L206">    public System_Order() {</span>
+<span class="fc" id="L207">        initComponents();</span>
+<span class="fc" id="L208">        ImageIcon icon = new ImageIcon(getClass().getResource(&quot;Combo A(1).png&quot;));</span>
+<span class="fc" id="L209">        Image img = icon.getImage().getScaledInstance(jLabel19.getWidth(), jLabel19.getHeight(), Image.SCALE_SMOOTH);</span>
+<span class="fc" id="L210">        jLabel19.setIcon(new ImageIcon(img));</span>
+
+<span class="fc" id="L212">        ImageIcon icon1 = new ImageIcon(getClass().getResource(&quot;Combo B(1).png&quot;));</span>
+<span class="fc" id="L213">        Image img1 = icon1.getImage().getScaledInstance(jLabel22.getWidth(), jLabel22.getHeight(), Image.SCALE_SMOOTH);</span>
+<span class="fc" id="L214">        jLabel22.setIcon(new ImageIcon(img1));</span>
+
+<span class="fc" id="L216">        ImageIcon icon2 = new ImageIcon(getClass().getResource(&quot;Combo C(1).png&quot;));</span>
+<span class="fc" id="L217">        Image img2 = icon2.getImage().getScaledInstance(jLabel24.getWidth(), jLabel24.getHeight(), Image.SCALE_SMOOTH);</span>
+<span class="fc" id="L218">        jLabel24.setIcon(new ImageIcon(img2));</span>
+
+<span class="fc" id="L220">        ImageIcon icon3 = new ImageIcon(getClass().getResource(&quot;Combo D(1).png&quot;));</span>
+<span class="fc" id="L221">        Image img3 = icon3.getImage().getScaledInstance(jLabel26.getWidth(), jLabel26.getHeight(), Image.SCALE_SMOOTH);</span>
+<span class="fc" id="L222">        jLabel26.setIcon(new ImageIcon(img3));</span>
+<span class="fc" id="L223">    }</span>
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="fc" id="L234">        jPanel1 = new javax.swing.JPanel();</span>
+<span class="fc" id="L235">        jPanel2 = new javax.swing.JPanel();</span>
+<span class="fc" id="L236">        jPanel5 = new javax.swing.JPanel();</span>
+<span class="fc" id="L237">        jLabel2 = new javax.swing.JLabel();</span>
+<span class="fc" id="L238">        jPanel4 = new javax.swing.JPanel();</span>
+<span class="fc" id="L239">        jLabel3 = new javax.swing.JLabel();</span>
+<span class="fc" id="L240">        cb_paket_frame2 = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="fc" id="L241">        jLabel4 = new javax.swing.JLabel();</span>
+<span class="fc" id="L242">        jLabel5 = new javax.swing.JLabel();</span>
+<span class="fc" id="L243">        txt_harga_paket_frame2 = new javax.swing.JTextField();</span>
+<span class="fc" id="L244">        jLabel6 = new javax.swing.JLabel();</span>
+<span class="fc" id="L245">        cb_alacarte_frame2 = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="fc" id="L246">        jLabel7 = new javax.swing.JLabel();</span>
+<span class="fc" id="L247">        jLabel8 = new javax.swing.JLabel();</span>
+<span class="fc" id="L248">        txt_harga_alacarte_frame2 = new javax.swing.JTextField();</span>
+<span class="fc" id="L249">        jLabel9 = new javax.swing.JLabel();</span>
+<span class="fc" id="L250">        jLabel10 = new javax.swing.JLabel();</span>
+<span class="fc" id="L251">        jLabel11 = new javax.swing.JLabel();</span>
+<span class="fc" id="L252">        txt_harga_drinks_frame2 = new javax.swing.JTextField();</span>
+<span class="fc" id="L253">        cb_drinks_frame2 = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="fc" id="L254">        btn_ok_frame2 = new javax.swing.JButton();</span>
+<span class="fc" id="L255">        btn_reset_frame2 = new javax.swing.JButton();</span>
+<span class="fc" id="L256">        jLabel16 = new javax.swing.JLabel();</span>
+<span class="fc" id="L257">        jLabel17 = new javax.swing.JLabel();</span>
+<span class="fc" id="L258">        jLabel18 = new javax.swing.JLabel();</span>
+<span class="fc" id="L259">        sp_jumlah_paket = new javax.swing.JSpinner();</span>
+<span class="fc" id="L260">        sp_jumlah_alacarte = new javax.swing.JSpinner();</span>
+<span class="fc" id="L261">        sp_jumlah_drinks = new javax.swing.JSpinner();</span>
+<span class="fc" id="L262">        jPanel7 = new javax.swing.JPanel();</span>
+<span class="fc" id="L263">        jLabel12 = new javax.swing.JLabel();</span>
+<span class="fc" id="L264">        jPanel3 = new javax.swing.JPanel();</span>
+<span class="fc" id="L265">        jLabel1 = new javax.swing.JLabel();</span>
+<span class="fc" id="L266">        jPanel6 = new javax.swing.JPanel();</span>
+<span class="fc" id="L267">        jLabel13 = new javax.swing.JLabel();</span>
+<span class="fc" id="L268">        jLabel14 = new javax.swing.JLabel();</span>
+<span class="fc" id="L269">        jLabel15 = new javax.swing.JLabel();</span>
+<span class="fc" id="L270">        txt_total_harga_frame2 = new javax.swing.JTextField();</span>
+<span class="fc" id="L271">        txt_jumlah_bayar_frame2 = new javax.swing.JTextField();</span>
+<span class="fc" id="L272">        txt_jumlah_kembalian_frame2 = new javax.swing.JTextField();</span>
+<span class="fc" id="L273">        btn_bayar_frame2 = new javax.swing.JButton();</span>
+<span class="fc" id="L274">        btn_struk_frame2 = new javax.swing.JButton();</span>
+<span class="fc" id="L275">        txt_nama_cashier = new javax.swing.JLabel();</span>
+<span class="fc" id="L276">        jPanel8 = new javax.swing.JPanel();</span>
+<span class="fc" id="L277">        jScrollPane5 = new javax.swing.JScrollPane();</span>
+<span class="fc" id="L278">        jPanel11 = new javax.swing.JPanel();</span>
+<span class="fc" id="L279">        jLabel20 = new javax.swing.JLabel();</span>
+<span class="fc" id="L280">        jPanel10 = new javax.swing.JPanel();</span>
+<span class="fc" id="L281">        jLabel19 = new javax.swing.JLabel();</span>
+<span class="fc" id="L282">        jPanel12 = new javax.swing.JPanel();</span>
+<span class="fc" id="L283">        jLabel21 = new javax.swing.JLabel();</span>
+<span class="fc" id="L284">        jPanel13 = new javax.swing.JPanel();</span>
+<span class="fc" id="L285">        jLabel22 = new javax.swing.JLabel();</span>
+<span class="fc" id="L286">        jPanel14 = new javax.swing.JPanel();</span>
+<span class="fc" id="L287">        jLabel23 = new javax.swing.JLabel();</span>
+<span class="fc" id="L288">        jPanel16 = new javax.swing.JPanel();</span>
+<span class="fc" id="L289">        jLabel25 = new javax.swing.JLabel();</span>
+<span class="fc" id="L290">        jPanel15 = new javax.swing.JPanel();</span>
+<span class="fc" id="L291">        jLabel24 = new javax.swing.JLabel();</span>
+<span class="fc" id="L292">        jPanel17 = new javax.swing.JPanel();</span>
+<span class="fc" id="L293">        jLabel26 = new javax.swing.JLabel();</span>
+
+<span class="fc" id="L295">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+
+<span class="fc" id="L297">        jPanel1.setBackground(new java.awt.Color(51, 51, 51));</span>
+<span class="fc" id="L298">        jPanel1.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L299">        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L301">        jPanel2.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L302">        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L304">        jPanel5.setBackground(new java.awt.Color(0, 102, 255));</span>
+
+<span class="fc" id="L306">        jLabel2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 29)); // NOI18N</span>
+<span class="fc" id="L307">        jLabel2.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L308">        jLabel2.setText(&quot;Pilih Menu&quot;);</span>
+
+<span class="fc" id="L310">        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);</span>
+<span class="fc" id="L311">        jPanel5.setLayout(jPanel5Layout);</span>
+<span class="fc" id="L312">        jPanel5Layout.setHorizontalGroup(</span>
+<span class="fc" id="L313">            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L314">            .addGroup(jPanel5Layout.createSequentialGroup()</span>
+<span class="fc" id="L315">                .addGap(38, 38, 38)</span>
+<span class="fc" id="L316">                .addComponent(jLabel2)</span>
+<span class="fc" id="L317">                .addContainerGap(38, Short.MAX_VALUE))</span>
+        );
+<span class="fc" id="L319">        jPanel5Layout.setVerticalGroup(</span>
+<span class="fc" id="L320">            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L321">            .addGroup(jPanel5Layout.createSequentialGroup()</span>
+<span class="fc" id="L322">                .addContainerGap()</span>
+<span class="fc" id="L323">                .addComponent(jLabel2)</span>
+<span class="fc" id="L324">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="fc" id="L327">        jPanel2.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 230, 50));</span>
+
+<span class="fc" id="L329">        jPanel4.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L330">        jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));</span>
+<span class="fc" id="L331">        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L333">        jLabel3.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L334">        jLabel3.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L335">        jLabel3.setText(&quot;Paket&quot;);</span>
+<span class="fc" id="L336">        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));</span>
+
+<span class="fc" id="L338">        cb_paket_frame2.setBackground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L339">        cb_paket_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 16)); // NOI18N</span>
+<span class="fc" id="L340">        cb_paket_frame2.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L341">        cb_paket_frame2.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Pilih Pesanan&quot;, &quot;Combo A&quot;, &quot;Combo B&quot;, &quot;Combo C&quot;, &quot;Combo D&quot; }));</span>
+<span class="fc" id="L342">        cb_paket_frame2.setBorder(null);</span>
+<span class="fc" id="L343">        cb_paket_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="fc" id="L345">                cb_paket_frame2ActionPerformed(evt);</span>
+<span class="fc" id="L346">            }</span>
+        });
+<span class="fc" id="L348">        jPanel4.add(cb_paket_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 190, -1));</span>
+
+<span class="fc" id="L350">        jLabel4.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L351">        jLabel4.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L352">        jLabel4.setText(&quot;Alacarte&quot;);</span>
+<span class="fc" id="L353">        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));</span>
+
+<span class="fc" id="L355">        jLabel5.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L356">        jLabel5.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L357">        jLabel5.setText(&quot;Harga  &quot;);</span>
+<span class="fc" id="L358">        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, 30));</span>
+
+<span class="fc" id="L360">        txt_harga_paket_frame2.setEditable(false);</span>
+<span class="fc" id="L361">        txt_harga_paket_frame2.setBackground(new java.awt.Color(255, 255, 255));</span>
+<span class="fc" id="L362">        txt_harga_paket_frame2.setFont(new java.awt.Font(&quot;Yu Gothic Medium&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L363">        txt_harga_paket_frame2.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="fc" id="L364">        txt_harga_paket_frame2.setHorizontalAlignment(javax.swing.JTextField.CENTER);</span>
+<span class="fc" id="L365">        txt_harga_paket_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L366">        txt_harga_paket_frame2.setBorder(null);</span>
+<span class="fc" id="L367">        jPanel4.add(txt_harga_paket_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 140, 30));</span>
+
+<span class="fc" id="L369">        jLabel6.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L370">        jLabel6.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L371">        jLabel6.setText(&quot;Jumlah  &quot;);</span>
+<span class="fc" id="L372">        jPanel4.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 160, -1));</span>
+
+<span class="fc" id="L374">        cb_alacarte_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 16)); // NOI18N</span>
+<span class="fc" id="L375">        cb_alacarte_frame2.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Pilih Pesanan&quot;, &quot;Dada Ayam&quot;, &quot;Paha Atas Ayam&quot;, &quot;Paha Bawah Ayam&quot;, &quot;Sayap Ayam&quot;, &quot;Cheese Burger&quot;, &quot;Beef Burger&quot;, &quot;Chicken Burger&quot;, &quot;French Fries&quot;, &quot;Nasi&quot; }));</span>
+<span class="fc" id="L376">        cb_alacarte_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="fc" id="L378">                cb_alacarte_frame2ActionPerformed(evt);</span>
+<span class="fc" id="L379">            }</span>
+        });
+<span class="fc" id="L381">        jPanel4.add(cb_alacarte_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 190, 30));</span>
+
+<span class="fc" id="L383">        jLabel7.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L384">        jLabel7.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L385">        jLabel7.setText(&quot;Harga&quot;);</span>
+<span class="fc" id="L386">        jPanel4.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));</span>
+
+<span class="fc" id="L388">        jLabel8.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L389">        jLabel8.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L390">        jLabel8.setText(&quot;Jumlah&quot;);</span>
+<span class="fc" id="L391">        jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, -1, -1));</span>
+
+<span class="fc" id="L393">        txt_harga_alacarte_frame2.setEditable(false);</span>
+<span class="fc" id="L394">        txt_harga_alacarte_frame2.setFont(new java.awt.Font(&quot;Yu Gothic Medium&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L395">        txt_harga_alacarte_frame2.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="fc" id="L396">        txt_harga_alacarte_frame2.setHorizontalAlignment(javax.swing.JTextField.CENTER);</span>
+<span class="fc" id="L397">        txt_harga_alacarte_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L398">        jPanel4.add(txt_harga_alacarte_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 310, 140, 30));</span>
+
+<span class="fc" id="L400">        jLabel9.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L401">        jLabel9.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L402">        jLabel9.setText(&quot;Drinks&quot;);</span>
+<span class="fc" id="L403">        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, -1, -1));</span>
+
+<span class="fc" id="L405">        jLabel10.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L406">        jLabel10.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L407">        jLabel10.setText(&quot;Harga&quot;);</span>
+<span class="fc" id="L408">        jPanel4.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 500, -1, -1));</span>
+
+<span class="fc" id="L410">        jLabel11.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L411">        jLabel11.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L412">        jLabel11.setText(&quot;Jumlah&quot;);</span>
+<span class="fc" id="L413">        jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 550, -1, -1));</span>
+
+<span class="fc" id="L415">        txt_harga_drinks_frame2.setEditable(false);</span>
+<span class="fc" id="L416">        txt_harga_drinks_frame2.setFont(new java.awt.Font(&quot;Yu Gothic Medium&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L417">        txt_harga_drinks_frame2.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="fc" id="L418">        txt_harga_drinks_frame2.setHorizontalAlignment(javax.swing.JTextField.CENTER);</span>
+<span class="fc" id="L419">        txt_harga_drinks_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L420">        jPanel4.add(txt_harga_drinks_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 500, 140, 30));</span>
+
+<span class="fc" id="L422">        cb_drinks_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 16)); // NOI18N</span>
+<span class="fc" id="L423">        cb_drinks_frame2.setModel(new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Pilih Pesanan&quot;, &quot;Air Mineral&quot;, &quot;Soda&quot;, &quot;Ice Tea&quot;, &quot;Lemon Tea&quot;, &quot;Black Coffee&quot;, &quot;Capuccino&quot; }));</span>
+<span class="fc" id="L424">        cb_drinks_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="fc" id="L426">                cb_drinks_frame2ActionPerformed(evt);</span>
+<span class="fc" id="L427">            }</span>
+        });
+<span class="fc" id="L429">        jPanel4.add(cb_drinks_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 450, 190, 30));</span>
+
+<span class="fc" id="L431">        btn_ok_frame2.setBackground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L432">        btn_ok_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L433">        btn_ok_frame2.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L434">        btn_ok_frame2.setText(&quot;CALCULATE&quot;);</span>
+<span class="fc" id="L435">        btn_ok_frame2.setBorder(null);</span>
+<span class="fc" id="L436">        btn_ok_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L438">                btn_ok_frame2ActionPerformed(evt);</span>
+<span class="nc" id="L439">            }</span>
+        });
+<span class="fc" id="L441">        jPanel4.add(btn_ok_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 640, 110, 30));</span>
+
+<span class="fc" id="L443">        btn_reset_frame2.setBackground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L444">        btn_reset_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L445">        btn_reset_frame2.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L446">        btn_reset_frame2.setText(&quot;RESET&quot;);</span>
+<span class="fc" id="L447">        btn_reset_frame2.setBorder(null);</span>
+<span class="fc" id="L448">        btn_reset_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L450">                btn_reset_frame2ActionPerformed(evt);</span>
+<span class="nc" id="L451">            }</span>
+        });
+<span class="fc" id="L453">        jPanel4.add(btn_reset_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 640, 90, 30));</span>
+
+<span class="fc" id="L455">        jLabel16.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L456">        jLabel16.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L457">        jLabel16.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="fc" id="L458">        jLabel16.setText(&quot;Rp&quot;);</span>
+<span class="fc" id="L459">        jPanel4.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, -1, 30));</span>
+
+<span class="fc" id="L461">        jLabel17.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L462">        jLabel17.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L463">        jLabel17.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="fc" id="L464">        jLabel17.setText(&quot;Rp&quot;);</span>
+<span class="fc" id="L465">        jPanel4.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, 30));</span>
+
+<span class="fc" id="L467">        jLabel18.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L468">        jLabel18.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L469">        jLabel18.setForeground(new java.awt.Color(0, 0, 0));</span>
+<span class="fc" id="L470">        jLabel18.setText(&quot;Rp&quot;);</span>
+<span class="fc" id="L471">        jPanel4.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, -1, 30));</span>
+
+<span class="fc" id="L473">        sp_jumlah_paket.setFont(new java.awt.Font(&quot;Yu Gothic UI Light&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L474">        sp_jumlah_paket.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));</span>
+<span class="fc" id="L475">        sp_jumlah_paket.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="fc" id="L476">        jPanel4.add(sp_jumlah_paket, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 190, 30));</span>
+
+<span class="fc" id="L478">        sp_jumlah_alacarte.setFont(new java.awt.Font(&quot;Yu Gothic Light&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L479">        sp_jumlah_alacarte.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));</span>
+<span class="fc" id="L480">        jPanel4.add(sp_jumlah_alacarte, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 360, 190, 30));</span>
+
+<span class="fc" id="L482">        sp_jumlah_drinks.setFont(new java.awt.Font(&quot;Yu Gothic Light&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L483">        sp_jumlah_drinks.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));</span>
+<span class="fc" id="L484">        jPanel4.add(sp_jumlah_drinks, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 550, 190, 30));</span>
+
+<span class="fc" id="L486">        jPanel2.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 450, 710));</span>
+
+<span class="fc" id="L488">        jPanel7.setBackground(new java.awt.Color(0, 102, 255));</span>
+
+<span class="fc" id="L490">        jLabel12.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 29)); // NOI18N</span>
+<span class="fc" id="L491">        jLabel12.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L492">        jLabel12.setText(&quot;Pembayaran&quot;);</span>
+
+<span class="fc" id="L494">        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);</span>
+<span class="fc" id="L495">        jPanel7.setLayout(jPanel7Layout);</span>
+<span class="fc" id="L496">        jPanel7Layout.setHorizontalGroup(</span>
+<span class="fc" id="L497">            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L498">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()</span>
+<span class="fc" id="L499">                .addContainerGap(34, Short.MAX_VALUE)</span>
+<span class="fc" id="L500">                .addComponent(jLabel12)</span>
+<span class="fc" id="L501">                .addGap(32, 32, 32))</span>
+        );
+<span class="fc" id="L503">        jPanel7Layout.setVerticalGroup(</span>
+<span class="fc" id="L504">            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L505">            .addGroup(jPanel7Layout.createSequentialGroup()</span>
+<span class="fc" id="L506">                .addContainerGap()</span>
+<span class="fc" id="L507">                .addComponent(jLabel12)</span>
+<span class="fc" id="L508">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+
+<span class="fc" id="L511">        jPanel2.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 260, 250, 50));</span>
+
+<span class="fc" id="L513">        jPanel3.setBackground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L514">        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L516">        jLabel1.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L517">        jLabel1.setFont(new java.awt.Font(&quot;Earwig Factory&quot;, 3, 48)); // NOI18N</span>
+<span class="fc" id="L518">        jLabel1.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L519">        jLabel1.setText(&quot;Food JRS&quot;);</span>
+<span class="fc" id="L520">        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 300, 80));</span>
+
+<span class="fc" id="L522">        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-90, -10, 1130, 120));</span>
+
+<span class="fc" id="L524">        jPanel6.setBackground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L525">        jPanel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 255)));</span>
+<span class="fc" id="L526">        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L528">        jLabel13.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L529">        jLabel13.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L530">        jLabel13.setText(&quot;Total Harga&quot;);</span>
+<span class="fc" id="L531">        jPanel6.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));</span>
+
+<span class="fc" id="L533">        jLabel14.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L534">        jLabel14.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L535">        jLabel14.setText(&quot;Jumlah Bayar&quot;);</span>
+<span class="fc" id="L536">        jPanel6.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));</span>
+
+<span class="fc" id="L538">        jLabel15.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 24)); // NOI18N</span>
+<span class="fc" id="L539">        jLabel15.setForeground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L540">        jLabel15.setText(&quot;Jumlah Kembalian&quot;);</span>
+<span class="fc" id="L541">        jPanel6.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));</span>
+
+<span class="fc" id="L543">        txt_total_harga_frame2.setEditable(false);</span>
+<span class="fc" id="L544">        txt_total_harga_frame2.setFont(new java.awt.Font(&quot;Yu Gothic Medium&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L545">        txt_total_harga_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L546">        jPanel6.add(txt_total_harga_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 160, 30));</span>
+
+<span class="fc" id="L548">        txt_jumlah_bayar_frame2.setFont(new java.awt.Font(&quot;Yu Gothic Medium&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L549">        txt_jumlah_bayar_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L550">        jPanel6.add(txt_jumlah_bayar_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 160, 30));</span>
+
+<span class="fc" id="L552">        txt_jumlah_kembalian_frame2.setEditable(false);</span>
+<span class="fc" id="L553">        txt_jumlah_kembalian_frame2.setFont(new java.awt.Font(&quot;Yu Gothic Medium&quot;, 1, 18)); // NOI18N</span>
+<span class="fc" id="L554">        txt_jumlah_kembalian_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L555">        jPanel6.add(txt_jumlah_kembalian_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 160, 30));</span>
+
+<span class="fc" id="L557">        btn_bayar_frame2.setBackground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L558">        btn_bayar_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L559">        btn_bayar_frame2.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L560">        btn_bayar_frame2.setText(&quot;BAYAR&quot;);</span>
+<span class="fc" id="L561">        btn_bayar_frame2.setBorder(null);</span>
+<span class="fc" id="L562">        btn_bayar_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L564">                btn_bayar_frame2ActionPerformed(evt);</span>
+<span class="nc" id="L565">            }</span>
+        });
+<span class="fc" id="L567">        jPanel6.add(btn_bayar_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 90, 30));</span>
+
+<span class="fc" id="L569">        btn_struk_frame2.setBackground(new java.awt.Color(0, 102, 255));</span>
+<span class="fc" id="L570">        btn_struk_frame2.setFont(new java.awt.Font(&quot;COCOMAT&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L571">        btn_struk_frame2.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L572">        btn_struk_frame2.setText(&quot;STRUK&quot;);</span>
+<span class="fc" id="L573">        btn_struk_frame2.setBorder(null);</span>
+<span class="fc" id="L574">        btn_struk_frame2.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L576">                btn_struk_frame2ActionPerformed(evt);</span>
+<span class="nc" id="L577">            }</span>
+        });
+<span class="fc" id="L579">        jPanel6.add(btn_struk_frame2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, 90, 30));</span>
+
+<span class="fc" id="L581">        jPanel2.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 280, 450, 490));</span>
+
+<span class="fc" id="L583">        txt_nama_cashier.setForeground(new java.awt.Color(204, 204, 204));</span>
+<span class="fc" id="L584">        txt_nama_cashier.setText(&quot;jLabel19&quot;);</span>
+<span class="fc" id="L585">        jPanel2.add(txt_nama_cashier, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 120, -1, 60));</span>
+
+<span class="fc" id="L587">        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 1040, 910));</span>
+
+<span class="fc" id="L589">        jPanel8.setBackground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L590">        jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L592">        jScrollPane5.setBorder(null);</span>
+<span class="fc" id="L593">        jPanel8.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, -1));</span>
+
+<span class="fc" id="L595">        jPanel11.setBackground(new java.awt.Color(0, 82, 165));</span>
+
+<span class="fc" id="L597">        jLabel20.setFont(new java.awt.Font(&quot;Anime Ace&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L598">        jLabel20.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L599">        jLabel20.setText(&quot;COMBO A&quot;);</span>
+
+<span class="fc" id="L601">        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);</span>
+<span class="fc" id="L602">        jPanel11.setLayout(jPanel11Layout);</span>
+<span class="fc" id="L603">        jPanel11Layout.setHorizontalGroup(</span>
+<span class="fc" id="L604">            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L605">            .addGroup(jPanel11Layout.createSequentialGroup()</span>
+<span class="fc" id="L606">                .addGap(39, 39, 39)</span>
+<span class="fc" id="L607">                .addComponent(jLabel20)</span>
+<span class="fc" id="L608">                .addContainerGap(43, Short.MAX_VALUE))</span>
+        );
+<span class="fc" id="L610">        jPanel11Layout.setVerticalGroup(</span>
+<span class="fc" id="L611">            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L612">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()</span>
+<span class="fc" id="L613">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="fc" id="L614">                .addComponent(jLabel20)</span>
+<span class="fc" id="L615">                .addContainerGap())</span>
+        );
+
+<span class="fc" id="L618">        jPanel8.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 170, 30));</span>
+
+<span class="fc" id="L620">        jPanel10.setBackground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L621">        jPanel10.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 82, 165), 2, true));</span>
+<span class="fc" id="L622">        jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L624">        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/projectjrs/Combo A(1).png&quot;))); // NOI18N</span>
+<span class="fc" id="L625">        jPanel10.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 240, 210));</span>
+
+<span class="fc" id="L627">        jPanel8.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, 230, 150));</span>
+
+<span class="fc" id="L629">        jPanel12.setBackground(new java.awt.Color(0, 82, 165));</span>
+
+<span class="fc" id="L631">        jLabel21.setFont(new java.awt.Font(&quot;Anime Ace&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L632">        jLabel21.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L633">        jLabel21.setText(&quot;COMBO B&quot;);</span>
+
+<span class="fc" id="L635">        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);</span>
+<span class="fc" id="L636">        jPanel12.setLayout(jPanel12Layout);</span>
+<span class="fc" id="L637">        jPanel12Layout.setHorizontalGroup(</span>
+<span class="fc" id="L638">            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L639">            .addGroup(jPanel12Layout.createSequentialGroup()</span>
+<span class="fc" id="L640">                .addGap(39, 39, 39)</span>
+<span class="fc" id="L641">                .addComponent(jLabel21)</span>
+<span class="fc" id="L642">                .addContainerGap(43, Short.MAX_VALUE))</span>
+        );
+<span class="fc" id="L644">        jPanel12Layout.setVerticalGroup(</span>
+<span class="fc" id="L645">            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L646">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()</span>
+<span class="fc" id="L647">                .addContainerGap(7, Short.MAX_VALUE)</span>
+<span class="fc" id="L648">                .addComponent(jLabel21)</span>
+<span class="fc" id="L649">                .addContainerGap())</span>
+        );
+
+<span class="fc" id="L652">        jPanel8.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, -1, -1));</span>
+
+<span class="fc" id="L654">        jPanel13.setBackground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L655">        jPanel13.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 82, 165), 2, true));</span>
+<span class="fc" id="L656">        jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L658">        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/projectjrs/Combo B(1).png&quot;))); // NOI18N</span>
+<span class="fc" id="L659">        jPanel13.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 210, 180));</span>
+
+<span class="fc" id="L661">        jPanel8.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 230, 150));</span>
+
+<span class="fc" id="L663">        jPanel14.setBackground(new java.awt.Color(0, 82, 165));</span>
+
+<span class="fc" id="L665">        jLabel23.setFont(new java.awt.Font(&quot;Anime Ace&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L666">        jLabel23.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L667">        jLabel23.setText(&quot;COMBO D&quot;);</span>
+
+<span class="fc" id="L669">        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);</span>
+<span class="fc" id="L670">        jPanel14.setLayout(jPanel14Layout);</span>
+<span class="fc" id="L671">        jPanel14Layout.setHorizontalGroup(</span>
+<span class="fc" id="L672">            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L673">            .addGroup(jPanel14Layout.createSequentialGroup()</span>
+<span class="fc" id="L674">                .addGap(39, 39, 39)</span>
+<span class="fc" id="L675">                .addComponent(jLabel23)</span>
+<span class="fc" id="L676">                .addContainerGap(43, Short.MAX_VALUE))</span>
+        );
+<span class="fc" id="L678">        jPanel14Layout.setVerticalGroup(</span>
+<span class="fc" id="L679">            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L680">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()</span>
+<span class="fc" id="L681">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="fc" id="L682">                .addComponent(jLabel23)</span>
+<span class="fc" id="L683">                .addContainerGap())</span>
+        );
+
+<span class="fc" id="L686">        jPanel8.add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 600, -1, 30));</span>
+
+<span class="fc" id="L688">        jPanel16.setBackground(new java.awt.Color(0, 82, 165));</span>
+
+<span class="fc" id="L690">        jLabel25.setFont(new java.awt.Font(&quot;Anime Ace&quot;, 1, 14)); // NOI18N</span>
+<span class="fc" id="L691">        jLabel25.setForeground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L692">        jLabel25.setText(&quot;COMBO C&quot;);</span>
+
+<span class="fc" id="L694">        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);</span>
+<span class="fc" id="L695">        jPanel16.setLayout(jPanel16Layout);</span>
+<span class="fc" id="L696">        jPanel16Layout.setHorizontalGroup(</span>
+<span class="fc" id="L697">            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L698">            .addGroup(jPanel16Layout.createSequentialGroup()</span>
+<span class="fc" id="L699">                .addGap(39, 39, 39)</span>
+<span class="fc" id="L700">                .addComponent(jLabel25)</span>
+<span class="fc" id="L701">                .addContainerGap(43, Short.MAX_VALUE))</span>
+        );
+<span class="fc" id="L703">        jPanel16Layout.setVerticalGroup(</span>
+<span class="fc" id="L704">            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L705">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()</span>
+<span class="fc" id="L706">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="fc" id="L707">                .addComponent(jLabel25)</span>
+<span class="fc" id="L708">                .addContainerGap())</span>
+        );
+
+<span class="fc" id="L711">        jPanel8.add(jPanel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, -1, 30));</span>
+
+<span class="fc" id="L713">        jPanel15.setBackground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L714">        jPanel15.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 82, 165), 2, true));</span>
+<span class="fc" id="L715">        jPanel15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L717">        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/projectjrs/Combo C(1).png&quot;))); // NOI18N</span>
+<span class="fc" id="L718">        jPanel15.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -10, 210, 180));</span>
+
+<span class="fc" id="L720">        jPanel8.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 230, 150));</span>
+
+<span class="fc" id="L722">        jPanel17.setBackground(new java.awt.Color(153, 153, 153));</span>
+<span class="fc" id="L723">        jPanel17.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 82, 165), 2, true));</span>
+<span class="fc" id="L724">        jPanel17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());</span>
+
+<span class="fc" id="L726">        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/projectjrs/Combo D(1).png&quot;))); // NOI18N</span>
+<span class="fc" id="L727">        jPanel17.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 160, 140));</span>
+
+<span class="fc" id="L729">        jPanel8.add(jPanel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 620, 230, 150));</span>
+
+<span class="fc" id="L731">        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 90, 360, 800));</span>
+
+<span class="fc" id="L733">        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());</span>
+<span class="fc" id="L734">        getContentPane().setLayout(layout);</span>
+<span class="fc" id="L735">        layout.setHorizontalGroup(</span>
+<span class="fc" id="L736">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L737">            .addGroup(layout.createSequentialGroup()</span>
+<span class="fc" id="L738">                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1521, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="fc" id="L739">                .addGap(0, 0, Short.MAX_VALUE))</span>
+        );
+<span class="fc" id="L741">        layout.setVerticalGroup(</span>
+<span class="fc" id="L742">            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="fc" id="L743">            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 983, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+
+<span class="fc" id="L746">        pack();</span>
+<span class="fc" id="L747">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private void btn_reset_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reset_frame2ActionPerformed
+<span class="nc" id="L750">       Reset2();</span>
+
+<span class="nc" id="L752">    }//GEN-LAST:event_btn_reset_frame2ActionPerformed</span>
+
+    private void btn_ok_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ok_frame2ActionPerformed
+<span class="nc" id="L755">       calculate();</span>
+
+<span class="nc" id="L757">    }//GEN-LAST:event_btn_ok_frame2ActionPerformed</span>
+
+    private void cb_paket_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_paket_frame2ActionPerformed
+<span class="fc" id="L760">       combo();</span>
+//      txt_jumlah_paket_frame2.setText(Gantiformat);
+
+<span class="fc" id="L763">    }//GEN-LAST:event_cb_paket_frame2ActionPerformed</span>
+
+    private void btn_bayar_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bayar_frame2ActionPerformed
+
+<span class="nc" id="L767">        bayar();</span>
+
+
+<span class="nc" id="L770">    }//GEN-LAST:event_btn_bayar_frame2ActionPerformed</span>
+
+    private void cb_alacarte_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_alacarte_frame2ActionPerformed
+<span class="fc" id="L773">      alacarte();</span>
+//        txt_jumlah_alacarte_frame2.setText(Gantiformat);
+
+<span class="fc" id="L776">    }//GEN-LAST:event_cb_alacarte_frame2ActionPerformed</span>
+
+    private void cb_drinks_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_drinks_frame2ActionPerformed
+<span class="fc" id="L779">        drink();</span>
+        
+<span class="fc" id="L781">    }//GEN-LAST:event_cb_drinks_frame2ActionPerformed</span>
+
+    private void btn_struk_frame2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_struk_frame2ActionPerformed
+<span class="nc" id="L784">      hilang();</span>
+<span class="nc" id="L785">        dispose();</span>
+<span class="nc" id="L786">    }//GEN-LAST:event_btn_struk_frame2ActionPerformed</span>
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //&lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot; Look and feel setting code (optional) &quot;&gt;
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+<span class="nc bnc" id="L798" title="All 2 branches missed.">            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {</span>
+<span class="nc bnc" id="L799" title="All 2 branches missed.">                if (&quot;Nimbus&quot;.equals(info.getName())) {</span>
+<span class="nc" id="L800">                    javax.swing.UIManager.setLookAndFeel(info.getClassName());</span>
+<span class="nc" id="L801">                    break;</span>
+                }
+            }
+<span class="nc" id="L804">        } catch (ClassNotFoundException ex) {</span>
+<span class="nc" id="L805">            java.util.logging.Logger.getLogger(System_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L806">        } catch (InstantiationException ex) {</span>
+<span class="nc" id="L807">            java.util.logging.Logger.getLogger(System_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L808">        } catch (IllegalAccessException ex) {</span>
+<span class="nc" id="L809">            java.util.logging.Logger.getLogger(System_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L810">        } catch (javax.swing.UnsupportedLookAndFeelException ex) {</span>
+<span class="nc" id="L811">            java.util.logging.Logger.getLogger(System_Order.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);</span>
+<span class="nc" id="L812">        }</span>
+        //&lt;/editor-fold&gt;
+        //&lt;/editor-fold&gt;
+
+        /* Create and display the form */
+<span class="nc" id="L817">        java.awt.EventQueue.invokeLater(new Runnable() {</span>
+            public void run() {
+<span class="nc" id="L819">                new System_Order().setVisible(true);</span>
+<span class="nc" id="L820">            }</span>
+        });
+<span class="nc" id="L822">    }</span>
+    
+
+public int subtract(int firstNumber, int secondNumber){
+<span class="fc" id="L826">    return firstNumber-secondNumber;</span>
+}
+public int multiply(int firstNumber, int secondNumber){
+<span class="fc" id="L829">    return firstNumber*secondNumber;</span>
+}
+
+public int pajak(int a,int b ,int c,int d,int e){
+<span class="fc" id="L833">        return (a+b+c)*d/e;</span>
+    
+}
+public int total(int a,int b ,int c,int d){
+<span class="fc" id="L837">    return (a+b+c)+d;</span>
+}
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_bayar_frame2;
+    private javax.swing.JButton btn_ok_frame2;
+    private javax.swing.JButton btn_reset_frame2;
+    private javax.swing.JButton btn_struk_frame2;
+    public static javax.swing.JComboBox&lt;String&gt; cb_alacarte_frame2;
+    public static javax.swing.JComboBox&lt;String&gt; cb_drinks_frame2;
+    public static javax.swing.JComboBox&lt;String&gt; cb_paket_frame2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
+    private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane5;
+    public static javax.swing.JSpinner sp_jumlah_alacarte;
+    public static javax.swing.JSpinner sp_jumlah_drinks;
+    public static javax.swing.JSpinner sp_jumlah_paket;
+    public static javax.swing.JTextField txt_harga_alacarte_frame2;
+    public static javax.swing.JTextField txt_harga_drinks_frame2;
+    public static javax.swing.JTextField txt_harga_paket_frame2;
+    public static javax.swing.JTextField txt_jumlah_bayar_frame2;
+    public static javax.swing.JTextField txt_jumlah_kembalian_frame2;
+    public static javax.swing.JLabel txt_nama_cashier;
+    public static javax.swing.JTextField txt_total_harga_frame2;
+    // End of variables declaration//GEN-END:variables
+  
+
+      
+        public String Reset2() {
+<span class="fc" id="L906">            txt_harga_alacarte_frame2.setText(&quot;&quot;);</span>
+<span class="fc" id="L907">            txt_harga_drinks_frame2.setText(&quot;&quot;);</span>
+<span class="fc" id="L908">            txt_harga_paket_frame2.setText(&quot;&quot;);</span>
+<span class="fc" id="L909">            sp_jumlah_paket.setValue(0);</span>
+<span class="fc" id="L910">            sp_jumlah_alacarte.setValue(0);</span>
+<span class="fc" id="L911">            sp_jumlah_drinks.setValue(0);</span>
+<span class="fc" id="L912">            cb_alacarte_frame2.setSelectedIndex(0);</span>
+<span class="fc" id="L913">            cb_drinks_frame2.setSelectedIndex(0);</span>
+<span class="fc" id="L914">            cb_paket_frame2.setSelectedIndex(0);</span>
+<span class="fc" id="L915">            txt_total_harga_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L916">            txt_jumlah_bayar_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L917">            txt_jumlah_kembalian_frame2.setText(&quot;0&quot;);</span>
+<span class="fc" id="L918">            return null;</span>
+        }
+    
+  public String hilang() {
+<span class="fc" id="L922">        Receipt f3 = new Receipt();</span>
+<span class="fc" id="L923">        f3.setVisible(true);</span>
+<span class="fc" id="L924">        dispose();</span>
+<span class="fc" id="L925">        return null;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
